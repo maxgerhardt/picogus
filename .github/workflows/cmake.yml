@@ -84,3 +84,12 @@ jobs:
           cmake $GITHUB_WORKSPACE/sw -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DPROJECT_TYPE="JOY"
           cmake --build . --config $BUILD_TYPE --parallel $(nproc)
           cp picogus.uf2 $OUTPUT_DIR/picogus-joy.uf2
+
+      - name: Package Firmwares
+        run: cd $OUTPUT_DIR && zip -r ${{github.workspace}}/firmwares.zip .
+
+      - name: Upload All Firmwares
+        uses: actions/upload-artifact@v3
+        with:
+          name: PicoGUS Firmwares
+          path: firmwares.zip
