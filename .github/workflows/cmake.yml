@@ -22,6 +22,8 @@ jobs:
         with:
           release: '12.3.Rel1'
 
+      # Since we reference stable versions of Pico-SDK and pico-extras, we can cache their (HUGE!) downloads.
+      # If this were to reference changing branches (like "master"), this caching step must be removed!!!
       - name: Cache Pico-SDK and Extras 
         id: cache-sdk
         uses: actions/cache@v3
@@ -29,6 +31,7 @@ jobs:
           path: ${{github.workspace}}/../pico/
           key: ${{ env.PICOSDK_VER }}-${{ env.PICOEXTRA_VER }}          
 
+      # If we did not find stuff in the cache, download it fresh.
       - name: Clone Pico-SDK
         if: steps.cache-sdk.outputs.cache-hit != 'true'
         run: git clone -b "$PICOSDK_VER" --recursive https://github.com/raspberrypi/pico-sdk.git $PICO_SDK_PATH
@@ -37,8 +40,6 @@ jobs:
         run: git clone -b "$PICOEXTRA_VER" --recursive https://github.com/raspberrypi/pico-extras.git $PICO_EXTRAS_PATH
 
       - name: Create Build Environment
-        # Some projects don't allow in-source building, so create a separate build directory
-        # We'll use this as our working directory for all subsequent commands
         run: cmake -E make_directory ${{github.workspace}}/build
 
       - name: Patch CMake (disable LTO)
