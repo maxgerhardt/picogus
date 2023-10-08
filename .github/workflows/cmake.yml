@@ -8,18 +8,14 @@ jobs:
         PICOSDK_VER: "1.5.1"
         PICOEXTRA_VER: "sdk-1.5.1"
       steps:
-      - name: Clean workspace
-        run: |
-          echo "Cleaning up previous run"
-          rm -rf "${{ github.workspace }}"
-          mkdir -p "${{ github.workspace }}"
-  
-      - name: Checkout repo
+      - name: Checkout repo with submodules
         uses: actions/checkout@v4
-  
-      - name: Checkout submodules
-        run: git submodule update --init
-
+        with:
+            submodules: recursive
+      - name: Install Arm GNU Toolchain (arm-none-eabi-gcc)
+        uses: carlosperate/arm-none-eabi-gcc-action@v1
+        with:
+          release: '12.3.Rel1'
       - name: Clone Pico-SDK
         run: git clone -b "$PICOSDK_VER" --recursive https://github.com/raspberrypi/pico-sdk.git ${{github.workspace}}/pico/pico-sdk
 
