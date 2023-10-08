@@ -89,4 +89,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: PicoGUS Firmwares
-          path: $OUTPUT_DIR/*.uf2
+          path: $OUTPUT_DIR
