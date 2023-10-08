@@ -8,8 +8,8 @@ jobs:
         PICOSDK_VER: "1.5.1"
         PICOEXTRA_VER: "sdk-1.5.1"
         # The Pico-SDK will listen to these environment vars
-        PICO_SDK_PATH: ${{github.workspace}}/../pico/pico-sdk
-        PICO_EXTRAS_PATH: ${{github.workspace}}/../pico/pico-extras
+        PICO_SDK_PATH: ${{github.workspace}}/pico/pico-sdk
+        PICO_EXTRAS_PATH: ${{github.workspace}}/pico/pico-extras
         OUTPUT_DIR: ${{github.workspace}}/binaries
       steps:
       - name: Checkout repo with submodules
