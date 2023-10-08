@@ -28,7 +28,7 @@ jobs:
         id: cache-sdk
         uses: actions/cache@v3
         with:
-          path: ${{github.workspace}}/../pico/
+          path: ${{github.workspace}}/pico/
           key: ${{ env.PICOSDK_VER }}-${{ env.PICOEXTRA_VER }}          
 
       # If we did not find stuff in the cache, download it fresh.
