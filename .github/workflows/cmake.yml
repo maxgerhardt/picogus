@@ -38,12 +38,12 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}/build
         run: |
-          cmake $GITHUB_WORKSPACE/sw -DCMAKE_BUILD_TYPE=$BUILD_TYPE "-DPICO_SDK_PATH=${{github.workspace}}/pico/pico-sdk" "-DPICO_EXTRAS_PATH=${{github.workspace}}/pico/pico-extras"
-          cmake --build . --config $BUILD_TYPE --parallel $(nproc) -DPROJECT_TYPE="GUS"
+          cmake $GITHUB_WORKSPACE/sw -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DPROJECT_TYPE="GUS" "-DPICO_SDK_PATH=${{github.workspace}}/pico/pico-sdk" "-DPICO_EXTRAS_PATH=${{github.workspace}}/pico/pico-extras"
+          cmake --build . --config $BUILD_TYPE --parallel $(nproc)
 
       - name: Build OPL Firmware
         working-directory: ${{github.workspace}}/build
         shell: bash
         run: |
-          cmake $GITHUB_WORKSPACE/sw -DCMAKE_BUILD_TYPE=$BUILD_TYPE "-DPICO_SDK_PATH=${{github.workspace}}/pico/pico-sdk" "-DPICO_EXTRAS_PATH=${{github.workspace}}/pico/pico-extras"
-          cmake --build . --config $BUILD_TYPE --parallel $(nproc) -DPROJECT_TYPE="OPL"
+          cmake $GITHUB_WORKSPACE/sw -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DPROJECT_TYPE="OPL" "-DPICO_SDK_PATH=${{github.workspace}}/pico/pico-sdk" "-DPICO_EXTRAS_PATH=${{github.workspace}}/pico/pico-extras"
+          cmake --build . --config $BUILD_TYPE --parallel $(nproc)
